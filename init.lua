@@ -11,8 +11,14 @@ math.randomseed(os.time())
 random_messages = {}
 random_messages.messages = {} --This table contains all messages.
 
+function table.count( t )
+	local i = 0
+	for k in pairs( t ) do i = i + 1 end
+	return i
+end
+
 function table.random( t )
-	local rk = math.random( 1, table.Count( t ) )
+	local rk = math.random( 1, table.count( t ) )
 	local i = 1
 	for k, v in pairs( t ) do
 		if ( i == rk ) then return v, k end
