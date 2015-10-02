@@ -11,7 +11,7 @@ math.randomseed(os.time())
 random_messages = {}
 random_messages.messages = {} --This table contains all messages.
 
-function table.Random( t )
+function table.random( t )
 	local rk = math.random( 1, table.Count( t ) )
 	local i = 1
 	for k, v in pairs( t ) do
@@ -107,6 +107,7 @@ end)
 
 local register_chatcommand_table = {
 	params = "viewmessages | removemessage <number> | addmessage <number>",
+	privs = {server = true},
 	description = "View and/or alter the server's random messages",
 	func = function(name,param)
 		local t = string.split(param, " ")
