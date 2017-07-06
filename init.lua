@@ -29,13 +29,13 @@ function table.random( t )
 end
 
 function random_messages.initialize() --Set the interval in minetest.conf.
-	minetest.setting_set("random_messages_interval",120)
-	minetest.setting_save();
+	minetest.settings:set("random_messages_interval",120)
+	minetest.settings:save();
 	return 120
 end
 
 function random_messages.set_interval() --Read the interval from minetest.conf(set it if it doesn'st exist)
-	MESSAGE_INTERVAL = tonumber(minetest.setting_get("random_messages_interval")) or random_messages.initialize()
+	MESSAGE_INTERVAL = tonumber(minetest.settings:get("random_messages_interval")) or random_messages.initialize()
 end
 
 function random_messages.check_params(name,func,params)
