@@ -5,6 +5,8 @@ arsdragonfly@gmail.com
 --]]
 --Time between two subsequent messages.
 local MESSAGE_INTERVAL = 0
+-- Added default messages file
+local default_messages_file = "default_random_messages"
 
 math.randomseed(os.time())
 
@@ -47,14 +49,27 @@ end
 
 function random_messages.read_messages()
 	local line_number = 1
+	-- define input 
 	local input = io.open(minetest.get_worldpath().."/random_messages","r")
+	-- no input file found
 	if not input then
+		-- look for default file
+		local default_input = io.open(minetest.get_modpath("random_messages").."/"..default_messages_file,"r")
 		local output = io.open(minetest.get_worldpath().."/random_messages","w")
-		output:write("Blame the server admin! He/She has probably not edited the random messages yet.\n")
-		output:write("Tell your dumb admin that this line is in (worldpath)/random_messages \n")
+		if not default_input then
+			-- blame the admin if not found
+			output:write("Blame the server admin! He/She has probably not edited the random messages yet.\n")
+			output:write("Tell your dumb admin that this line is in (worldpath)/random_messages \n")
+		else
+			-- or write default_input content in worldpath message file
+			local content = default_input:read("*all")
+			output:write(content)
+		end
 		io.close(output)
+		io.close(default_input)
 		input = io.open(minetest.get_worldpath().."/random_messages","r")
 	end
+	-- we should have input by now, so lets read it
 	for line in input:lines() do
 		random_messages.messages[line_number] = line
 		line_number = line_number + 1
