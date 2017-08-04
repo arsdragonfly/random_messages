@@ -13,6 +13,10 @@ math.randomseed(os.time())
 random_messages = {}
 random_messages.messages = {} --This table contains all messages.
 
+-- Load support for intllib.
+local MP = minetest.get_modpath(minetest.get_current_modname())
+local S, NS = dofile(MP.."/intllib.lua")
+
 function table.count( t )
 	local i = 0
 	for k in pairs( t ) do i = i + 1 end
@@ -58,8 +62,8 @@ function random_messages.read_messages()
 		local output = io.open(minetest.get_worldpath().."/random_messages","w")
 		if not default_input then
 			-- blame the admin if not found
-			output:write("Blame the server admin! He/She has probably not edited the random messages yet.\n")
-			output:write("Tell your dumb admin that this line is in (worldpath)/random_messages \n")
+			output:write(S("Blame the server admin! He/She has probably not edited the random messages yet.\n"))
+			output:write(S("Tell your dumb admin that this line is in (worldpath)/random_messages\n"))
 		else
 			-- or write default_input content in worldpath message file
 			local content = default_input:read("*all")
@@ -130,7 +134,7 @@ end)
 local register_chatcommand_table = {
 	params = "viewmessages | removemessage <number> | addmessage <number>",
 	privs = {server = true},
-	description = "View and/or alter the server's random messages",
+	description = S("View and/or alter the server's random messages"),
 	func = function(name,param)
 		local t = string.split(param, " ")
 		if t[1] == "viewmessages" then
@@ -141,7 +145,7 @@ local register_chatcommand_table = {
 			function (params)
 				if not tonumber(params[2]) or
 				random_messages.messages[tonumber(params[2])] == nil then
-					return false,"ERROR: No such message."
+					return false,S("ERROR: No such message.")
 				end
 				return true
 			end,
@@ -149,12 +153,12 @@ local register_chatcommand_table = {
 			random_messages.remove_message(t[2])
 		elseif t[1] == "addmessage" then
 			if not t[2] then
-				minetest.chat_send_player(name,"ERROR: No message.")
+				minetest.chat_send_player(name,S("ERROR: No message."))
 			else
 				random_messages.add_message(t)
 			end
 		else
-				minetest.chat_send_player(name,"ERROR: Invalid command.")
+				minetest.chat_send_player(name,S("ERROR: Invalid command."))
 		end
 	end
 }
