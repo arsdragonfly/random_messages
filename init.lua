@@ -64,6 +64,7 @@ function random_messages.read_messages()
 			-- blame the admin if not found
 			output:write(S("Blame the server admin! He/She has probably not edited the random messages yet.\n"))
 			output:write(S("Tell your dumb admin that this line is in (worldpath)/random_messages\n"))
+			return
 		else
 			-- or write default_input content in worldpath message file
 			local content = default_input:read("*all")
