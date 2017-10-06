@@ -34,7 +34,7 @@ end
 
 function random_messages.initialize() --Set the interval in minetest.conf.
 	minetest.settings:set("random_messages_interval",120)
-	minetest.settings:save();
+	minetest.settings:write();
 	return 120
 end
 
