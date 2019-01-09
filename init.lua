@@ -64,6 +64,7 @@ function random_messages.read_messages()
 			-- blame the admin if not found
 			output:write(S("Blame the server admin! He/She has probably not edited the random messages yet.\n"))
 			output:write(S("Tell your dumb admin that this line is in (worldpath)/random_messages\n"))
+			return
 		else
 			-- or write default_input content in worldpath message file
 			local content = default_input:read("*all")
@@ -123,13 +124,15 @@ random_messages.set_interval()
 random_messages.read_messages()
 
 local TIMER = 0
-minetest.register_globalstep(function(dtime)
-	TIMER = TIMER + dtime;
-	if TIMER > MESSAGE_INTERVAL then
-		random_messages.show_message()
-		TIMER = 0
-	end
-end)
+if random_messages.messages[1] then
+	minetest.register_globalstep(function(dtime)
+		TIMER = TIMER + dtime;
+		if TIMER > MESSAGE_INTERVAL then
+			random_messages.show_message()
+			TIMER = 0
+		end
+	end)
+end
 
 local register_chatcommand_table = {
 	params = "viewmessages | removemessage <number> | addmessage <number>",
