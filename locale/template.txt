@@ -1,0 +1,8 @@
+# textdomain: random_messages
+
+Blame the server admin! He/She has probably not edited the random messages yet.=
+Tell your dumb admin that this line is in (worldpath)/random_messages=
+View and/or alter the server's random messages=
+ERROR: No such message.=
+ERROR: No message.=
+ERROR: Invalid command.=
