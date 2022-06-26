@@ -1,0 +1,8 @@
+# textdomain: random_messages
+
+Blame the server admin! He/She has probably not edited the random messages yet.=Tirez les oreilles à l'administrateur du serveur. Il/elle n'a pas encore modifié les messages aléatoires.
+Tell your dumb admin that this line is in (worldpath)/random_messages=Dites à votre administrateur à la noix que cette ligne se trouve dans (worldpath)/random_messages
+View and/or alter the server's random messages=Afficher et/ou modifier les messages aléatoires du serveur
+ERROR: No such message.=ERREUR : ce message est inexistant.
+ERROR: No message.=ERREUR : pas de message.
+ERROR: Invalid command.=ERREUR : Commande invalide.

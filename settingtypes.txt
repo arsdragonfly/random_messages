@@ -1,0 +1,2 @@
+# Default is 120 seconds.
+random_messages_interval (Time between two subsequent messages) int 120
